@@ -1,6 +1,15 @@
 from rest_framework import viewsets
-from base.serializers import CourseSerializer, AssessmentSerializer, ClassSerializer, StudentSerializer, ResultSerializer
+from django.contrib.auth.models import User, Group
+from base.serializers import UserSerializer, GroupSerializer, CourseSerializer, AssessmentSerializer, ClassSerializer, StudentSerializer, ResultSerializer
 from base.models import Course, Assessment, Class, Student, Result
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
