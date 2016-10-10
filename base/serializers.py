@@ -21,7 +21,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
 class AssessmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Assessment
-        fields = ('description', 'end_date', 'title', 'iteration', 'start_date', 'id')
+        fields = ('classtime', 'description', 'end_date', 'title', 'id', 'start_date')
 
 class ClassSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

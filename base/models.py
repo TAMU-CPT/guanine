@@ -26,7 +26,7 @@ class Assessment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=64)
     description = models.TextField(blank=True)
-    iteration = models.ForeignKey(Class)
+    classtime = models.ForeignKey(Class)
     start_date = models.DateField()
     end_date = models.DateField()
 
