@@ -11,5 +11,5 @@ router.register(r'results', views.ResultViewSet)
 router.register(r'students', views.StudentViewSet)
 
 urlpatterns = [
-    url(r'^base/', include(router.urls)),
+    url(r'^', include(router.urls)),
 ]
