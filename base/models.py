@@ -11,6 +11,7 @@ class Course(models.Model):
     description = models.TextField(blank=True)
 
 class Student(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=128)
     email = models.CharField(max_length=128)
 
@@ -29,6 +30,9 @@ class Assessment(models.Model):
     classtime = models.ForeignKey(Class)
     start_date = models.DateField()
     end_date = models.DateField()
+
+    def __str__(self):
+        return str(self.title)
 
 class Result(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

@@ -3,23 +3,23 @@ from .models import Course, Assessment, Class, Student, Result
 
 class CourseAdmin(admin.ModelAdmin):
     queryset = Course.objects.all()
-    list_display = ('description', 'id', 'name')
+    list_display = ('id', 'description', 'name')
 
 class AssessmentAdmin(admin.ModelAdmin):
     queryset = Assessment.objects.all()
-    list_display = ('classtime', 'description', 'end_date', 'title', 'id', 'start_date')
+    list_display = ('id', 'classtime', 'description', 'end_date', 'title', 'start_date')
 
 class ClassAdmin(admin.ModelAdmin):
     queryset = Class.objects.all()
-    list_display = ('description', 'end_date', 'id', 'course', 'start_date')
+    list_display = ('id', 'description', 'end_date', 'course', 'start_date')
 
 class StudentAdmin(admin.ModelAdmin):
     queryset = Student.objects.all()
-    list_display = ('name', 'email')
+    list_display = ('id', 'name', 'email')
 
 class ResultAdmin(admin.ModelAdmin):
     queryset = Result.objects.all()
-    list_display = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
+    list_display = ('id', 'points_possible', 'points_earned', 'submitted', 'student', 'assessment')
 
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Assessment, AssessmentAdmin)
