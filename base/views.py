@@ -12,8 +12,14 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
+    def get_queryset(self):
+        if not self.request.user.is_anonymous():
+            return Course.objects.filter(professor = self.request.user)
+        # for testing
+        else:
+            return Course.objects.all()
 
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()

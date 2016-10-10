@@ -3,7 +3,7 @@ from .models import Course, Semester, Assessment, Result, Student
 
 class CourseAdmin(admin.ModelAdmin):
     queryset = Course.objects.all()
-    list_display = ('description', 'id', 'name')
+    list_display = ('name', 'id', 'description')
 
 class SemesterAdmin(admin.ModelAdmin):
     queryset = Semester.objects.all()
@@ -11,11 +11,7 @@ class SemesterAdmin(admin.ModelAdmin):
 
 class AssessmentAdmin(admin.ModelAdmin):
     queryset = Assessment.objects.all()
-    list_display = ('id', 'classtime', 'description', 'end_date', 'title', 'start_date')
-
-class ClassAdmin(admin.ModelAdmin):
-    queryset = Class.objects.all()
-    list_display = ('id', 'description', 'end_date', 'course', 'start_date')
+    list_display = ('id', 'semester', 'description', 'end_date', 'title', 'start_date')
 
 class StudentAdmin(admin.ModelAdmin):
     queryset = Student.objects.all()
