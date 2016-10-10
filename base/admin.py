@@ -1,19 +1,28 @@
 from django.contrib import admin
-from .models import Course, Iteration, Assessment, Result
+from .models import Course, Assessment, Class, Student, Result
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'description')
-
-class IterationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'description', 'course', 'start_date', 'end_date')
+    queryset = Course.objects.all()
+    list_display = ('description', 'id', 'name')
 
 class AssessmentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'description', 'iteration', 'start_date', 'end_date')
+    queryset = Assessment.objects.all()
+    list_display = ('description', 'end_date', 'title', 'iteration', 'start_date', 'id')
+
+class ClassAdmin(admin.ModelAdmin):
+    queryset = Class.objects.all()
+    list_display = ('course', 'start_date', 'id', 'end_date', 'description')
+
+class StudentAdmin(admin.ModelAdmin):
+    queryset = Student.objects.all()
+    list_display = ('iteration', 'name', 'email')
 
 class ResultAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'assessment', 'submitted', 'score')
+    queryset = Result.objects.all()
+    list_display = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
 
 admin.site.register(Course, CourseAdmin)
-admin.site.register(Iteration, IterationAdmin)
 admin.site.register(Assessment, AssessmentAdmin)
+admin.site.register(Class, ClassAdmin)
+admin.site.register(Student, StudentAdmin)
 admin.site.register(Result, ResultAdmin)

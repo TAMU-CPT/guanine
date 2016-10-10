@@ -1,22 +1,27 @@
 from rest_framework import serializers
-from base.models import Course, Iteration, Assessment, Result
+from base.models import Course, Assessment, Class, Student, Result
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Course
-        fields = ('id', 'name', 'description')
-
-class IterationSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Iteration
-        fields = ('id', 'description', 'course', 'users', 'start_date', 'end_date')
+        fields = ('professor', 'description', 'id', 'name')
 
 class AssessmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Assessment
-        fields = ('id', 'title', 'description', 'iteration', 'start_date', 'end_date')
+        fields = ('description', 'end_date', 'title', 'iteration', 'start_date', 'id')
+
+class ClassSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Class
+        fields = ('course', 'start_date', 'id', 'end_date', 'description')
+
+class StudentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('iteration', 'name', 'email')
 
 class ResultSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Result
-        fields = ('id', 'user', 'assessment', 'submitted', 'score')
+        fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
