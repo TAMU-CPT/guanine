@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from base.models import Course, Assessment, Class, Student, Result
+from base.models import Course, Semester, Assessment, Result, Student
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,22 +18,22 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
         model = Course
         fields = ('professor', 'description', 'id', 'name')
 
+class SemesterSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Semester
+        fields = ('name', 'end_date', 'students', 'id', 'course', 'start_date')
+
 class AssessmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Assessment
-        fields = ('classtime', 'description', 'end_date', 'title', 'id', 'start_date')
-
-class ClassSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Class
-        fields = ('description', 'end_date', 'students', 'id', 'course', 'start_date')
-
-class StudentSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Student
-        fields = ('id', 'name', 'email')
+        fields = ('description', 'end_date', 'title', 'id', 'semester', 'start_date')
 
 class ResultSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Result
         fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
+
+class StudentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('email', 'id', 'name')

@@ -1,9 +1,13 @@
 from django.contrib import admin
-from .models import Course, Assessment, Class, Student, Result
+from .models import Course, Semester, Assessment, Result, Student
 
 class CourseAdmin(admin.ModelAdmin):
     queryset = Course.objects.all()
-    list_display = ('id', 'description', 'name')
+    list_display = ('description', 'id', 'name')
+
+class SemesterAdmin(admin.ModelAdmin):
+    queryset = Semester.objects.all()
+    list_display = ('name', 'end_date', 'id', 'course', 'start_date')
 
 class AssessmentAdmin(admin.ModelAdmin):
     queryset = Assessment.objects.all()
@@ -22,7 +26,7 @@ class ResultAdmin(admin.ModelAdmin):
     list_display = ('id', 'points_possible', 'points_earned', 'submitted', 'student', 'assessment')
 
 admin.site.register(Course, CourseAdmin)
+admin.site.register(Semester, SemesterAdmin)
 admin.site.register(Assessment, AssessmentAdmin)
-admin.site.register(Class, ClassAdmin)
-admin.site.register(Student, StudentAdmin)
 admin.site.register(Result, ResultAdmin)
+admin.site.register(Student, StudentAdmin)
