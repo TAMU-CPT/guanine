@@ -26,12 +26,12 @@ class AssessmentSerializer(serializers.HyperlinkedModelSerializer):
 class ClassSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Class
-        fields = ('course', 'start_date', 'id', 'end_date', 'description')
+        fields = ('description', 'end_date', 'students', 'id', 'course', 'start_date')
 
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Student
-        fields = ('iteration', 'name', 'email')
+        fields = ('name', 'email')
 
 class ResultSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

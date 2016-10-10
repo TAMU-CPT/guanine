@@ -10,17 +10,17 @@ class Course(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField(blank=True)
 
+class Student(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.CharField(max_length=128)
+
 class Class(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     description = models.TextField(blank=True)
     course = models.ForeignKey(Course)
     start_date = models.DateField()
     end_date = models.DateField()
-
-class Student(models.Model):
-    name = models.CharField(max_length=128)
-    email = models.CharField(max_length=128)
-    iteration = models.ForeignKey(Class)
+    students = models.ManyToManyField(Student)
 
 class Assessment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

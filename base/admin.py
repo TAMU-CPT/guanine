@@ -11,11 +11,11 @@ class AssessmentAdmin(admin.ModelAdmin):
 
 class ClassAdmin(admin.ModelAdmin):
     queryset = Class.objects.all()
-    list_display = ('course', 'start_date', 'id', 'end_date', 'description')
+    list_display = ('description', 'end_date', 'id', 'course', 'start_date')
 
 class StudentAdmin(admin.ModelAdmin):
     queryset = Student.objects.all()
-    list_display = ('iteration', 'name', 'email')
+    list_display = ('name', 'email')
 
 class ResultAdmin(admin.ModelAdmin):
     queryset = Result.objects.all()
