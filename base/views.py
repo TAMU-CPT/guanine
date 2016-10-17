@@ -1,7 +1,7 @@
 from rest_framework import viewsets, filters
 from django.contrib.auth.models import User, Group
-from base.serializers import UserSerializer, GroupSerializer, CourseSerializer, SemesterSerializer, AssessmentSerializer, ResultSerializer, StudentSerializer
-from base.models import Course, Semester, Assessment, Result, Student
+from base.serializers import UserSerializer, GroupSerializer, CourseSerializer, AssessmentSerializer, ResultSerializer, StudentSerializer
+from base.models import Course, Assessment, Result, Student
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -22,10 +22,6 @@ class CourseViewSet(viewsets.ModelViewSet):
         # for testing
         else:
             return Course.objects.all()
-
-class SemesterViewSet(viewsets.ModelViewSet):
-    queryset = Semester.objects.all()
-    serializer_class = SemesterSerializer
 
 class AssessmentViewSet(viewsets.ModelViewSet):
     queryset = Assessment.objects.all()
