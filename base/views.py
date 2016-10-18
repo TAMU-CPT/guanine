@@ -36,7 +36,6 @@ class CourseViewSet(viewsets.ModelViewSet):
         print '*********'
         print serializer
         print '*********'
-        course = serializer.save()
         course.professor.add(self.request.user)
         # course = serializer.save(name=self.request.data['name'])
         # serializer.save(professor = [self.request.user])
