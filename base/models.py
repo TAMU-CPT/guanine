@@ -17,9 +17,9 @@ class Course(models.Model):
     professor = models.ManyToManyField(User)
     name = models.CharField(max_length=64)
     description = models.TextField(blank=True)
-    students = models.ManyToManyField(Student)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    students = models.ManyToManyField(Student, null=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
