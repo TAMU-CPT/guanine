@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     groups = GroupSerializer(many=True)
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = ('id', 'username', 'email', 'groups')
 
 class AssessmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -29,8 +29,9 @@ class StudentSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('email', 'id', 'name')
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
-    professor = UserSerializer(read_only=True, allow_null=True)
+    professor = UserSerializer(read_only=True, many=True)
     students = StudentSerializer(read_only=True, many=True)
+
     class Meta:
         model = Course
-        fields = ('professor', 'description', 'id', 'name', 'students')
+        fields = ('description', 'id', 'name', 'students', 'professor')#, 'students', 'professor')
