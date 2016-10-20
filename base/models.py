@@ -10,7 +10,7 @@ class Student(models.Model):
     email = models.CharField(max_length=128)
 
     def __str__(self):
-        return str(self.name)
+        return '%s <%s>' % (self.name, self.email)
 
 class Course(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
