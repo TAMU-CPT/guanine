@@ -30,11 +30,15 @@ class StudentSerializer(serializers.HyperlinkedModelSerializer):
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
     professor = UserSerializer(read_only=True, many=True)
-    students = StudentSerializer(many=True)
+    students = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
-        fields = ('description', 'id', 'name', 'students', 'professor')#, 'students', 'professor')
+        fields = ('description', 'id', 'name', 'students', 'professor')
+
+    def get_students(self, obj):
+        for student in obj.students.all().order_by('name'):
+            yield StudentSerializer(student).data
 
     def create(self, validated_data):
         # List of students
