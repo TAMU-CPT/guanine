@@ -13,28 +13,29 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email', 'groups')
 
-class AssessmentSerializer(serializers.HyperlinkedModelSerializer):
+class AssessmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assessment
         fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date')
 
-class ResultSerializer(serializers.HyperlinkedModelSerializer):
+class ResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = Result
         fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
 
-class StudentSerializer(serializers.HyperlinkedModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ('email', 'id', 'name')
 
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     professor = UserSerializer(read_only=True, many=True)
     students = StudentSerializer(many=True)
+    assessment_set = AssessmentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Course
-        fields = ('description', 'id', 'name', 'students', 'professor', 'start_date', 'end_date')
+        fields = ('description', 'id', 'name', 'students', 'professor', 'start_date', 'end_date', 'assessment_set')
 
     def create(self, validated_data):
         # List of students
