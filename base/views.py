@@ -40,3 +40,5 @@ class ResultViewSet(viewsets.ModelViewSet):
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('email',)
