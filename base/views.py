@@ -37,7 +37,7 @@ class AssessmentViewSet(viewsets.ModelViewSet):
     ordering_fields = ('date',)
 
 class ResultViewSet(viewsets.ModelViewSet):
-    queryset = Result.objects.all()
+    queryset = Result.objects.all().order_by('-submitted')
     serializer_class = ResultSerializer
 
 class StudentViewSet(viewsets.ModelViewSet):

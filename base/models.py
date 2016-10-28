@@ -40,7 +40,6 @@ class Result(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     student = models.ForeignKey(Student)
     assessment = models.ForeignKey(Assessment)
-    submitted = models.DateTimeField(blank=True, null=True)
     points_earned = models.FloatField()
     points_possible = models.FloatField()
-    date = models.DateTimeField(auto_now_add=True)
+    submitted = models.DateTimeField(auto_now_add=True)
