@@ -13,15 +13,16 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email', 'groups')
 
-class AssessmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Assessment
-        fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date')
-
 class ResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = Result
         fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
+
+class AssessmentSerializer(serializers.ModelSerializer):
+    result_set = ResultSerializer(many=True, read_only=True)
+    class Meta:
+        model = Assessment
+        fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date', 'result_set')
 
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
