@@ -32,6 +32,9 @@ class CourseViewSet(viewsets.ModelViewSet):
 class AssessmentViewSet(viewsets.ModelViewSet):
     queryset = Assessment.objects.all()
     serializer_class = AssessmentSerializer
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
+    filter_fields = ('course',)
+    ordering_fields = ('date',)
 
 class ResultViewSet(viewsets.ModelViewSet):
     queryset = Result.objects.all()

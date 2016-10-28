@@ -29,6 +29,7 @@ class Assessment(models.Model):
     title = models.CharField(max_length=64)
     description = models.TextField(blank=True)
     course = models.ForeignKey(Course)
+    date = models.DateTimeField(auto_now_add=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
 
@@ -42,3 +43,4 @@ class Result(models.Model):
     submitted = models.DateTimeField(blank=True, null=True)
     points_earned = models.FloatField()
     points_possible = models.FloatField()
+    date = models.DateTimeField(auto_now_add=True)

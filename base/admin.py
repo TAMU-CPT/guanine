@@ -7,7 +7,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 class AssessmentAdmin(admin.ModelAdmin):
     queryset = Assessment.objects.all()
-    list_display = ('id', 'description', 'end_date', 'course', 'title', 'start_date')
+    list_display = ('id', 'description', 'date', 'course', 'title', 'start_date', 'end_date')
 
 class StudentAdmin(admin.ModelAdmin):
     queryset = Student.objects.all()
@@ -15,7 +15,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 class ResultAdmin(admin.ModelAdmin):
     queryset = Result.objects.all()
-    list_display = ('id', 'points_possible', 'points_earned', 'submitted', 'student', 'assessment')
+    list_display = ('id', 'points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'date')
 
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Assessment, AssessmentAdmin)
