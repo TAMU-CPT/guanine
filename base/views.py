@@ -25,9 +25,8 @@ class CourseViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if not self.request.user.is_anonymous():
             return Course.objects.filter(professor = self.request.user)
-        # for testing
         else:
-            return Course.objects.all()
+            return []
 
 class AssessmentViewSet(viewsets.ModelViewSet):
     queryset = Assessment.objects.all()
@@ -36,9 +35,21 @@ class AssessmentViewSet(viewsets.ModelViewSet):
     filter_fields = ('course',)
     ordering_fields = ('date',)
 
+    def get_queryset(self):
+        if not self.request.user.is_anonymous():
+            return Assessment.objects.filter(course__professor=self.request.user)
+        else:
+            return []
+
 class ResultViewSet(viewsets.ModelViewSet):
     queryset = Result.objects.all().order_by('-submitted')
     serializer_class = ResultSerializer
+
+    def get_queryset(self):
+        if not self.request.user.is_anonymous():
+            return Result.objects.filter(assessment__course__professor=self.request.user)
+        else:
+            return []
 
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
