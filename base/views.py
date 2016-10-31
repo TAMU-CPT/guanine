@@ -46,7 +46,7 @@ class ResultViewSet(viewsets.ModelViewSet):
     serializer_class = ResultSerializer
     filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
     filter_fields = ('student', 'assessment__course')
-    ordering_fields = ('assessment__title',)
+    ordering_fields = ('assessment__title', 'submitted',)
 
     def get_queryset(self):
         if not self.request.user.is_anonymous():
