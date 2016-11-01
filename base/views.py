@@ -1,10 +1,13 @@
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, permissions
 from django.contrib.auth.models import User, Group
 from base.serializers import UserSerializer, GroupSerializer, CourseSerializer, AssessmentSerializer, ResultSerializer, StudentSerializer
 from base.models import Course, Assessment, Result, Student
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
+    permission_classes = [
+        permissions.AllowAny # Or anon users can't register
+    ]
     serializer_class = UserSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
