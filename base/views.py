@@ -1,10 +1,13 @@
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, permissions
 from django.contrib.auth.models import User, Group
 from base.serializers import UserSerializer, GroupSerializer, CourseSerializer, AssessmentSerializer, ResultSerializer, StudentSerializer
 from base.models import Course, Assessment, Result, Student
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
+    permission_classes = [
+        permissions.AllowAny # Or anon users can't register
+    ]
     serializer_class = UserSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -46,7 +49,7 @@ class ResultViewSet(viewsets.ModelViewSet):
     serializer_class = ResultSerializer
     filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
     filter_fields = ('student', 'assessment__course')
-    ordering_fields = ('assessment__title',)
+    ordering_fields = ('assessment__title', 'submitted',)
 
     def get_queryset(self):
         if not self.request.user.is_anonymous():
