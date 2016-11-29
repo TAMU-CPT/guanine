@@ -4,7 +4,7 @@ FROM quay.io/tamu_cpt/django
 # Add our project to the /app/ folder
 ADD . /app/
 # Install dependencies
-RUN pip install -r /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 # Set current working directory to /app
 WORKDIR /app/
 
