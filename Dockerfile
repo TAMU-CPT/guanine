@@ -17,4 +17,4 @@ RUN chown -R django /app && \
 	python manage.py collectstatic --noinput
 
 # Drop permissions
-#USER django
+USER django
