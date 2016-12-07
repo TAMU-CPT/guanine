@@ -27,12 +27,11 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if not self.request.user.is_anonymous():
-            return Course.objects.filter(professor = self.request.user)
+            return Course.objects.filter(professor=self.request.user)
         else:
             return []
 
 class AssessmentViewSet(viewsets.ModelViewSet):
-    queryset = Assessment.objects.all()
     serializer_class = AssessmentSerializer
     filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter)
     filter_fields = ('course',)

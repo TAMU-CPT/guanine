@@ -31,22 +31,36 @@ class LiteAssessmentSerializer(serializers.ModelSerializer):
         model = Assessment
         fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date')
 
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('email', 'id', 'name')
+
+class ResultLiteSerializer(serializers.ModelSerializer):
+    student = StudentSerializer()
+
+    class Meta:
+        model = Result
+        fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
+
 class ResultSerializer(serializers.ModelSerializer):
     assessment = LiteAssessmentSerializer()
     class Meta:
         model = Result
         fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
 
+class LiteCourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('description', 'id', 'name', 'students')
+
 class AssessmentSerializer(serializers.ModelSerializer):
-    result_set = ResultSerializer(many=True, read_only=True)
+    result_set = ResultLiteSerializer(many=True, read_only=True)
+    course = LiteCourseSerializer(read_only=True)
+
     class Meta:
         model = Assessment
         fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date', 'result_set')
-
-class StudentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Student
-        fields = ('email', 'id', 'name')
 
 class CourseSerializer(serializers.ModelSerializer):
     professor = UserSerializer(read_only=True, many=True)
