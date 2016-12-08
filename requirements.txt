@@ -4,3 +4,4 @@ markdown
 django-filter
 djangorestframework-jwt
 django-cors-headers
+raven==5.32.0
