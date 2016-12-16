@@ -56,6 +56,10 @@ class ResultViewSet(viewsets.ModelViewSet):
         else:
             return []
 
+    def perform_create(self, serializer):
+        serializer.save(assessment=Assessment.objects.get(id=self.request.data['assessment']))
+
+
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

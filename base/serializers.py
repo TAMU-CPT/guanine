@@ -44,7 +44,7 @@ class ResultLiteSerializer(serializers.ModelSerializer):
         fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
 
 class ResultSerializer(serializers.ModelSerializer):
-    assessment = LiteAssessmentSerializer()
+    assessment = LiteAssessmentSerializer(read_only=True)
     class Meta:
         model = Result
         fields = ('points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'id')
