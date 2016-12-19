@@ -23,7 +23,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         """
         Save creator of Course as logged in user on create.
         """
-        serializer.save(professor=[self.request.user])
+        serializer.save(professor=[User.objects.get(username=username) for username in self.request.data['professor']])
 
     def get_queryset(self):
         if not self.request.user.is_anonymous():
