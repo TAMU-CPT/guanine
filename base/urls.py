@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import url, include
 from rest_framework import routers
 from base import views
@@ -12,3 +13,9 @@ router.register(r'students', views.StudentViewSet)
 urlpatterns = [
     url(r'^', include(router.urls, namespace="api")),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

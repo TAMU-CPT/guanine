@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'base',
     'rest_framework',
     'corsheaders',
+    'debug_toolbar',
 ]
+
+INTERNAL_IPS = ('127.0.0.1', )
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -68,6 +71,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = ('localhost:10000',)
