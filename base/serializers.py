@@ -56,11 +56,14 @@ class LiteCourseSerializer(serializers.ModelSerializer):
 
 class AssessmentSerializer(serializers.ModelSerializer):
     result_set = ResultLiteSerializer(many=True, read_only=True)
-    course = LiteCourseSerializer(read_only=True)
+    course_info = serializers.SerializerMethodField()
 
     class Meta:
         model = Assessment
-        fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date', 'result_set')
+        fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date', 'result_set', 'course_info')
+
+    def get_course_info(self, obj):
+        return LiteCourseSerializer(obj.course).data
 
 class CourseSerializer(serializers.ModelSerializer):
     professor = UserSerializer(read_only=True, many=True)
