@@ -29,7 +29,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_anonymous():
             return Course.objects.filter(professor=self.request.user)
         else:
-            return []
+            return Course.objects.none()
 
 class AssessmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssessmentSerializer
@@ -41,7 +41,7 @@ class AssessmentViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_anonymous():
             return Assessment.objects.filter(course__professor=self.request.user)
         else:
-            return []
+            return Assessment.objects.none()
 
 class ResultViewSet(viewsets.ModelViewSet):
     queryset = Result.objects.all().order_by('-submitted')
@@ -54,7 +54,7 @@ class ResultViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_anonymous():
             return Result.objects.filter(assessment__course__professor=self.request.user)
         else:
-            return []
+            return Result.objects.none()
 
     def perform_create(self, serializer):
         serializer.save(assessment=Assessment.objects.get(id=self.request.data['assessment']))
@@ -65,3 +65,6 @@ class StudentViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('email',)
+
+    def get_queryset(self):
+        return Student.objects.filter(course__professor=self.request.user)
