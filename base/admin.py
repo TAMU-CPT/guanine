@@ -15,7 +15,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 class ResultAdmin(admin.ModelAdmin):
     queryset = Result.objects.all()
-    list_display = ('id', 'points_possible', 'points_earned', 'submitted', 'student', 'assessment')
+    list_display = ('id', 'points_possible', 'points_earned', 'submitted', 'student', 'assessment', 'notes')
 
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Assessment, AssessmentAdmin)
