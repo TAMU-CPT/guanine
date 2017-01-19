@@ -7,7 +7,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 class AssessmentAdmin(admin.ModelAdmin):
     queryset = Assessment.objects.all()
-    list_display = ('id', 'description', 'date', 'course', 'title', 'start_date', 'end_date')
+    list_display = ('id', 'description', 'date', 'course', 'title', 'start_date', 'end_date', 'submit_multiple')
 
 class StudentAdmin(admin.ModelAdmin):
     queryset = Student.objects.all()
