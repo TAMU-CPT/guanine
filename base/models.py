@@ -43,3 +43,4 @@ class Result(models.Model):
     points_earned = models.FloatField()
     points_possible = models.FloatField()
     submitted = models.DateTimeField(auto_now_add=True)
+    notes = models.TextField(blank=True, null=True)
