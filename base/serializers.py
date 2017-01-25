@@ -60,7 +60,7 @@ class AssessmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Assessment
-        fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date', 'result_set', 'course_info')
+        fields = ('description', 'end_date', 'title', 'id', 'course', 'start_date', 'result_set', 'course_info', 'submit_multiple')
 
     def get_course_info(self, obj):
         return LiteCourseSerializer(obj.course).data
@@ -85,6 +85,7 @@ class CourseSerializer(serializers.ModelSerializer):
                 email=user['email'],
             )
             # Converting them to a list of Student objects
+            print _
             students.append(student)
 
         # We grab the professor list

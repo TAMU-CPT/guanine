@@ -1,4 +1,4 @@
-from rest_framework import viewsets, filters, permissions
+from rest_framework import viewsets, filters, permissions, serializers
 from django.contrib.auth.models import User, Group
 from base.serializers import UserSerializer, GroupSerializer, CourseSerializer, AssessmentSerializer, ResultSerializer, StudentSerializer
 from base.models import Course, Assessment, Result, Student
@@ -57,7 +57,11 @@ class ResultViewSet(viewsets.ModelViewSet):
             return Result.objects.none()
 
     def perform_create(self, serializer):
-        serializer.save(assessment=Assessment.objects.get(id=self.request.data['assessment']))
+        assessment = Assessment.objects.get(id=self.request.data['assessment'])
+        if assessment.submit_multiple or not assessment.result_set.all().count():
+            serializer.save(assessment=assessment)
+        else:
+            raise serializers.ValidationError("This quiz may not be submitted more than once")
 
 
 class StudentViewSet(viewsets.ModelViewSet):
@@ -67,4 +71,4 @@ class StudentViewSet(viewsets.ModelViewSet):
     filter_fields = ('email',)
 
     def get_queryset(self):
-        return Student.objects.filter(course__professor=self.request.user)
+        return Student.objects.filter(course__professor=self.request.user).distinct()
