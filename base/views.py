@@ -58,7 +58,7 @@ class ResultViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         assessment = Assessment.objects.get(id=self.request.data['assessment'])
-        if assessment.submit_multiple or not assessment.result_set.all().count():
+        if assessment.submit_multiple or not assessment.result_set.filter(student=self.request.data['student']).count():
             serializer.save(assessment=assessment)
         else:
             raise serializers.ValidationError("This quiz may not be submitted more than once")
