@@ -1,4 +1,4 @@
-# GUANINE
+# GUANINE [![Docker Repository on Quay](https://quay.io/repository/tamu_cpt/guanine-backend/status "Docker Repository on Quay")](https://quay.io/repository/tamu_cpt/guanine-backend)
 
 System to store results of "quizzes" and other assessments. This component is
 not galaxy specific (nor is the frontend), but we use it with a
