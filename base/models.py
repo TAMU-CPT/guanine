@@ -32,7 +32,7 @@ class Assessment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
-    submit_multiple = models.BooleanField(default=True)
+    submit_multiple = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.title)
