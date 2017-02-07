@@ -85,7 +85,6 @@ class CourseSerializer(serializers.ModelSerializer):
                 email=user['email'],
             )
             # Converting them to a list of Student objects
-            print _
             students.append(student)
 
         # We grab the professor list

@@ -11,6 +11,7 @@ router.register(r'results', views.ResultViewSet)
 router.register(r'students', views.StudentViewSet)
 
 urlpatterns = [
+    url(r'^regrade/', views.my_view),
     url(r'^', include(router.urls, namespace="api")),
 ]
 
